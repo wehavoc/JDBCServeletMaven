@@ -2,9 +2,37 @@
 <web-app
     version="4.0"
     xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-    xmlns:javaee="http://xmlns.jcp.org/xml/ns/javaee"
-    xmlns:xml="http://www.w3.org/XML/1998/namespace"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
-  <display-name>Archetype Created Web Application</display-name>
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                        http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+
+    <display-name>Archetype Created Web Application</display-name>
+
+    <!-- Existing servlet for product registration -->
+	    <servlet>
+	        <servlet-name>register</servlet-name>
+	        <servlet-class>
+	            com.hcl_jdbc_and_servlet_crud_project.ui.controller.RegisterProductController
+	        </servlet-class>
+	    </servlet>
+	
+	    <servlet-mapping>
+	        <servlet-name>register</servlet-name>
+	        <url-pattern>/product-register</url-pattern>
+	    </servlet-mapping>
+
+    <!-- Servlet to view all products -->
+	<servlet>
+	    <servlet-name>viewAllProduct</servlet-name>
+	    <servlet-class>
+	        com.hcl_jdbc_and_servlet_crud_project.ui.controller.ViewAllProduct
+	    </servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+	    <servlet-name>viewAllProduct</servlet-name>
+	    <url-pattern>/view-products</url-pattern>
+	</servlet-mapping>
+
+
 </web-app>

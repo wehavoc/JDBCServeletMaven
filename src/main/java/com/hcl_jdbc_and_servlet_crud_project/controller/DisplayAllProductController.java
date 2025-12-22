@@ -10,6 +10,7 @@ public class DisplayAllProductController {
 	public static void main(String[] args) {
 		List<Product> products = new ProductDao().getAllProductDetailsDao();
 		if (!products.isEmpty() && products != null) {
+			System.out.println(products.size() + " Products found:");
 			for(Product product : products) {
 				System.out.println(product);
 			}
