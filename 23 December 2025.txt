@@ -1,0 +1,70 @@
+									23 December 2025
+What is servlet: It is an API which is set of java interfaces and classes that enables java developers to create server side web component or java web application. It runs on web server or application server and handle HTTP client request. It is part of java EE or Jakarta EE. It is platform independent
+
+What is JSP: It stands for java or Jakarta server pages. It is server side technology which is used to create dynamic web pages by embedding java code into HTML. With the help of JSP we can write java code inside html pages for dynamic behaviour it is part of java EE or Jakarta EE which works of top on servlet technology.
+
+JSP animates(Tags): It provides several tags to write java code inside HTML pages 
+Scriptlet Tag
+	<%   
+		//here we can write java code
+	%>
+Scriplet Tag: Inside this tag we can write java variable declaration, method call statement, object creations, looping statements, decision statements etc.
+example: 
+	<%
+		int a = 10;
+		out.print(a);	// it will print in Web page
+		System.out.println(a);	// It will print in console 
+	%>
+2. Expression Tag: it is used print output on the browser and it is equivalent to out.print statement. we cannot write expression tag inside the scriptlet tag.
+	<% =
+ 		//here we can write java code
+ 	%>
+3. Declared Tag: this is used to declare method and variable.
+example: 
+	<%! public int getFactorialNumber(int a) {
+		int fact = 1;
+        	for(int i = 1; i <= a; i++) {
+            		fact = fact * i;
+        	}
+        	return fact;
+	}%>
+
+									24 December 2025
+4. Directive Tag: It is used to give instruction to the JSP container 
+	<%@ page language="java"%>
+5. Include directive: It is used to include one JSP file into another JSP file
+	<%@ include file="header.jsp" %>
+Q. What is JSTL: It stands for Jakarta server pages standards tag library. It is collection of readymade JSP page that help developer to write logic in JSP pages without using java codes.
+example: for(String s:list) { %>
+		<li><%=s%></li>
+	<% } %>
+		to
+
+	<c:forEach items = "${items}" var="s">
+		<li><c:out value="${s}" /></li>
+	</c:forEach>
+Q. What difference between WebServelt and web.xml
+
+								26 December 2025
+What is query string: In servlet API a query string is the part of url that stands extra data from the client to the server in name value pair
+syntax: url?name = value
+if you are to send multiple value we have to use AND(&) operator
+syntax: syntax: url?id=123&name=value
+
+Implicit JSP objects: implicit jsp objects are built in objects that JSP automatically provides so no neeed to create them in jsp pages. it help JSP pages to get data 
+	-> send responses,
+	-> manages user & sessions
+
+
+	   implicit objects 							description
+	request 		: 		it is reference variable of servletRequest used to get data send by the user from server to client and 							client to client 	
+	serverRequest 		:		it is used to send data to the user
+	out			: 		print content on the webpage.
+	session			: 		it stores user data or get user data during http session
+	application 		: 		it stores data shared by all users 
+	page			: 		it refers to the current JSP page
+	exception		: 		it handles errors only in error pages 
+	config			:		it gets sevlet configuration information 
+	pageContext		: 		it gives access to all JSP objects 
+
+Note: if database connection giving error we have to provide sql connector jar file to apache tomcat bin folder 

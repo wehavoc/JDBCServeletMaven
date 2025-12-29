@@ -13,35 +13,34 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @SuppressWarnings("serial")
-//@WebServlet("/product-register")
-public class RegisterProductController extends HttpServlet {
+@WebServlet("/update-product")
+public class UpdateProductController extends HttpServlet {
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		try {
 			Product product = new Product(Integer.parseInt(req.getParameter("id")), req.getParameter("name"),
 					req.getParameter("color"), Double.parseDouble(req.getParameter("price")),
 					LocalDate.parse(req.getParameter("mfd")), LocalDate.parse(req.getParameter("expd")));
 
-			Product savedProduct = new ProductDao().saveProductDao(product);
+			Product updatedProduct = new ProductDao().updateProductDao(product);
 
-			if (savedProduct != null) {
-				req.getSession().setAttribute("msg", "Product registered successfully!");
+			if (updatedProduct != null) {
+				req.getSession().setAttribute("msg", "Product updated successfully!");
 				req.getSession().setAttribute("msgType", "success");
 			} else {
-				req.getSession().setAttribute("msg", "Failed to register product.");
+				req.getSession().setAttribute("msg", "Failed to update product.");
 				req.getSession().setAttribute("msgType", "error");
 			}
 
-			// Redirect to view-products.jsp to clear query string
-			resp.sendRedirect("view-products.jsp");
+			// Redirect to clear query string
+			res.sendRedirect("view-products.jsp");
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			req.getSession().setAttribute("msg", "Error: " + e.getMessage());
 			req.getSession().setAttribute("msgType", "error");
-			resp.sendRedirect("view-products.jsp");
+			res.sendRedirect("view-products.jsp");
 		}
 	}
 }

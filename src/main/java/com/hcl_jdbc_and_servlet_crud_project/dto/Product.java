@@ -12,17 +12,8 @@ public class Product implements Serializable {
 	private LocalDate mfd;
 	private LocalDate expd;
 
-	@Override
-	public String toString() {
-		return "Product [id=" + id + ", name=" + name + ", color=" + color + ", price=" + price + ", mfd=" + mfd
-				+ ", expd=" + expd + ", getId()=" + getId() + ", hashCode()=" + hashCode() + ", getName()=" + getName()
-				+ ", getColor()=" + getColor() + ", getPrice()=" + getPrice() + ", getMfd()=" + getMfd()
-				+ ", getExpd()=" + getExpd() + ", getClass()=" + getClass() + ", toString()=" + super.toString() + "]";
-	}
-
 	public Product() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Product(int id, String name, String color, double price, LocalDate mfd, LocalDate expd) {
@@ -33,10 +24,6 @@ public class Product implements Serializable {
 		this.price = price;
 		this.mfd = mfd;
 		this.expd = expd;
-	}
-
-	public int getId() {
-		return id;
 	}
 
 	@Override
@@ -58,6 +45,10 @@ public class Product implements Serializable {
 				&& Double.doubleToLongBits(price) == Double.doubleToLongBits(other.price);
 	}
 
+	public int getId() {
+		return id;
+	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}

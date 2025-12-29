@@ -279,4 +279,46 @@ public class ProductDao {
 		}
 	}
 	
+	//Update ProductDao
+	public Product updateProductDao(Product product) {
+
+	    String updateProductQuery =
+	        "UPDATE product SET name = ?, color = ?, price = ?, mfd = ?, expd = ? WHERE id = ?";
+
+	    try (Connection connection = JdbcConnection.getJdbcConnection();
+	         PreparedStatement ps = connection.prepareStatement(updateProductQuery)) {
+
+	        ps.setString(1, product.getName());
+	        ps.setString(2, product.getColor());
+	        ps.setDouble(3, product.getPrice());
+	        ps.setObject(4, product.getMfd());
+	        ps.setObject(5, product.getExpd());
+	        ps.setInt(6, product.getId());
+
+	        int rowsUpdated = ps.executeUpdate();
+	        return rowsUpdated > 0 ? product : null;
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return null;
+	    }
+	}
+	public int getMaxProductId() {
+	    int maxId = 0;
+	    String sql = "SELECT MAX(id) AS maxId FROM product";
+	    try (Connection con = JdbcConnection.getJdbcConnection();
+	         PreparedStatement ps = con.prepareStatement(sql);
+	         ResultSet rs = ps.executeQuery()) {
+
+	        if (rs.next()) {
+	            maxId = rs.getInt("maxId");
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return maxId;
+	}
+
+
+	
 }

@@ -1,3 +1,4 @@
+<%@page import="com.hcl_jdbc_and_servlet_crud_project.dto.Product"%>
 <%@page import="com.hcl_jdbc_and_servlet_crud_project.dao.ProductDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -5,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Product Registration</title>
+<title>Modify Product</title>
 <style>
 body {
 	margin: 0;
@@ -13,7 +14,7 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font-family: Arial;
+	font-family: Arial, Helvetica, sans-serif;
 	background: linear-gradient(135deg, #667eea, #764ba2);
 }
 
@@ -23,7 +24,9 @@ body {
 	border-radius: 15px;
 	background: rgba(255, 255, 255, 0.2);
 	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
 	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+	border: 1px solid rgba(255, 255, 255, 0.3);
 	color: #fff;
 }
 
@@ -33,25 +36,32 @@ body {
 }
 
 label {
-	display: block;
+	font-size: 14px;
 	margin-top: 10px;
+	display: block;
 }
 
 input {
 	width: 100%;
-	padding: 8px;
+	padding: 8px 10px;
 	margin-top: 5px;
 	border-radius: 6px;
 	border: none;
+	outline: none;
+	font-size: 14px;
+}
+
+input[type="text"], input[type="date"] {
+	background: rgba(255, 255, 255, 0.8);
 }
 
 input[type="submit"] {
+	margin-top: 20px;
 	background-color: #4CAF50;
-	color: white;
+	color: #fff;
 	font-weight: bold;
 	cursor: pointer;
 	transition: background-color 0.3s ease, opacity 0.3s ease;
-	margin-top: 20px;
 }
 
 input[type="submit"]:disabled {
@@ -86,41 +96,33 @@ input[type="submit"]:disabled {
 <body>
 
 	<%
-	    ProductDao dao = new ProductDao();
-	    int nextId = dao.getMaxProductId() + 1; // get next ID
+	// Get product by id passed in query string
+	int productId = Integer.parseInt(request.getParameter("id"));
+	Product product = new ProductDao().DisplayProductByIdDao(productId);
 	%>
 
 	<div class="glass-form">
-		<h1>Product Registration</h1>
+		<h1>Update Product Form</h1>
 
-		<form action="product-register" method="post" id="productForm">
-
-			<label>Product Id</label> 
-			<input type="text" name="id" value="<%= nextId %>" readonly>
-
-			<label>Product Name</label> 
-			<input type="text" name="name" required>
-
-			<label>Product Color</label> 
-			<input type="text" name="color" required>
-
-			<label>Product Price</label> 
-			<input type="text" name="price" required>
-
-			<label>Product MFD</label> 
-			<input type="date" name="mfd" required>
-
-			<label>Product EXPD</label> 
-			<input type="date" name="expd" required>
-
-			<input type="submit" id="submitBtn" value="Register" disabled>
+		<form action="update-product" method="post" id="updateProductForm">
+			<label>Product Id</label> <input type="text" name="id"
+				value="<%=product.getId()%>" readonly> <label>Product
+				Name</label> <input type="text" name="name" value="<%=product.getName()%>"
+				required> <label>Product Color</label> <input type="text"
+				name="color" value="<%=product.getColor()%>" required> <label>Product
+				Price</label> <input type="text" name="price"
+				value="<%=product.getPrice()%>" required> <label>Product
+				MFD</label> <input type="date" name="mfd" value="<%=product.getMfd()%>"
+				required> <label>Product EXPD</label> <input type="date"
+				name="expd" value="<%=product.getExpd()%>" required> <input
+				type="submit" id="updateBtn" value="Update" disabled>
 		</form>
 	</div>
 
 	<script>
 document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("productForm");
-    const submitBtn = document.getElementById("submitBtn");
+    const form = document.getElementById("updateProductForm");
+    const submitBtn = document.getElementById("updateBtn");
     const inputs = form.querySelectorAll("input[type='text'], input[type='date']");
 
     function checkInputs() {
