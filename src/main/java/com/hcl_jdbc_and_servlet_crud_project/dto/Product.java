@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+@SuppressWarnings("serial")
 public class Product implements Serializable {
 	private int id;
 	private String name;

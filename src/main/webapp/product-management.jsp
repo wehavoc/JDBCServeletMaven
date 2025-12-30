@@ -4,14 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Home</title>
+<title>Product Management</title>
 
 <style>
 body {
     margin: 0;
-    min-height: 100vh;
     font-family: Arial, Helvetica, sans-serif;
     background: linear-gradient(135deg, #667eea, #764ba2);
+    min-height: 100vh;
 }
 
 /* Navbar */
@@ -68,12 +68,16 @@ body {
     transition: 0.3s ease;
 }
 
-.login-btn {
+.view-btn {
     background-color: #4b6cb7;
 }
 
-.signup-btn {
+.register-btn {
     background-color: #667eea;
+}
+
+.update-btn {
+    background-color: #764ba2;
 }
 
 .button:hover {
@@ -85,14 +89,15 @@ body {
 
 <!-- Navbar -->
 <div class="navbar">
-    <a href="loginUser.jsp">Login</a>
-    <a href="register-user.jsp">Sign Up</a>
+    <a href="product-management.jsp">Home</a>
+    <a href="logout">Logout</a>
 </div>
 
 <div class="glass-container">
-    <h1>Welcome to Product Management System</h1>
-    <a href="loginUser.jsp" class="button login-btn">Login</a>
-    <a href="register-user.jsp" class="button signup-btn">Sign Up</a>
+    <h1>Product Management</h1>
+    <a href="view-products.jsp" class="button view-btn">View Products</a>
+    <a href="product-register.jsp" class="button register-btn">Register Product</a>
+    <a href="view-products.jsp" class="button update-btn">Update Product</a>
 </div>
 
 </body>

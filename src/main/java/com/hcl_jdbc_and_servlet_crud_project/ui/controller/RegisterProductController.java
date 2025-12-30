@@ -7,7 +7,6 @@ import com.hcl_jdbc_and_servlet_crud_project.dao.ProductDao;
 import com.hcl_jdbc_and_servlet_crud_project.dto.Product;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

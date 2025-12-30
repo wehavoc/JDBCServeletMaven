@@ -51,7 +51,7 @@ syntax: url?name = value
 if you are to send multiple value we have to use AND(&) operator
 syntax: syntax: url?id=123&name=value
 
-Implicit JSP objects: implicit jsp objects are built in objects that JSP automatically provides so no neeed to create them in jsp pages. it help JSP pages to get data 
+Implicit JSP objects: implicit JSP objects are built in objects that JSP automatically provides so no neeed to create them in jsp pages. it help JSP pages to get data 
 	-> send responses,
 	-> manages user & sessions
 
@@ -68,3 +68,43 @@ Implicit JSP objects: implicit jsp objects are built in objects that JSP automat
 	pageContext		: 		it gives access to all JSP objects 
 
 Note: if database connection giving error we have to provide sql connector jar file to apache tomcat bin folder 
+
+								29 December 2025
+
+Session is Servlet API : In servlet API, a session is way to store user specific data across multiple HTTP request, HTTP request static call the server does not automatically remember a user between request. session solve this by keeping data associated with a particular user for period of time. 
+a session typically store information like 1.loggin status 2. user preferences. 3. Shopping card data.
+
+								30 December 2025
+
+## Different ways to achieve session tracking: 
+1. Cookies: Cookies store the data on client browser. Server send the cookies to the browser and browser stores and send it back with every request to the servver so server can recognise every request coming from client to server.
+	To achieve session with cookies we use cookies classad
+advantages: it is simple to use 
+disadvantage: it's size is limited, it can be disable by users, it is less secure
+
+2. URL rewriting: we use reponse.sendredirect("pageName;id=123") 
+advantage: it works even cookies are disables
+disadvantages: it is less secure because session id visible in URL
+
+3. Hidde From fields: we use <input type="hidden" name = "", value"123"/>
+advantagees: it is simple to use.
+disadvantages : it works only with HTML forms and it is not secure.
+
+4. HTTPSession: it is interace which is present in jakarta.servlet package. it has multiple methods to achieve session. in this data is stored on the server and browser as well and each usr get the unique session id while performing request from client to server.
+advantages: it is more secure and no size limitatiions 
+disadvantages: it uses server memory
+How to achive this: 
+	Step 1: get the object of HTTP session and store data inside the session as a key and value pair
+		doPost(HttpServletRequest req, HttpServletResponse res)
+		HttpSession s = req.geSession()
+		s.setAttribute("userId", 123)
+	Step 2: Retrieving data from session to do secure request and response
+		String s = (Strin)s.getAttribute("userid")
+	Step 3: Removing session data 
+		how to remove session -> s.removeAttribute(userId);
+	Step 4: Ending the session or invalid a session
+		How to do this -> s.invalidate()
+		It destroyes the session and removes all stored data. it is commanly used in logout process
+
+## Session Timeout: here session automatically expires after inactive time we can set default timeout in web.xml or with the help of inbuilt method(s.setMaxInActiveInterval(time is second))
+To Do : create user class in DTO id, emial, password and in dao UserDao, create table in DB, Controller UserRegisterController,create signUp page, 
