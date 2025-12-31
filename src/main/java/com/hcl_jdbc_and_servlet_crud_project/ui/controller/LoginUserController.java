@@ -11,6 +11,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @SuppressWarnings("serial")
 @WebServlet("/login")
@@ -30,8 +31,12 @@ public class LoginUserController extends HttpServlet {
             if (user != null) {
                 // check password
                 if (PasswordUtil.checkPassword(password, user.getPassword())) {
+                		HttpSession session = req.getSession();
+                		session.setAttribute("loggedInUser", user.getEmail());
+                		
                     // ✅ Login success
-                    res.sendRedirect("loginUser.jsp?status=success");
+                		
+                    res.sendRedirect("product-management.jsp");
                 } else {
                     // ❌ Password incorrect
                     res.sendRedirect("loginUser.jsp?status=invalid");

@@ -1,3 +1,4 @@
+<%@page import="jakarta.servlet.http.HttpSession"%>
 <%@page import="com.hcl_jdbc_and_servlet_crud_project.dto.Product"%>
 <%@page import="com.hcl_jdbc_and_servlet_crud_project.dao.ProductDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -96,9 +97,14 @@ input[type="submit"]:disabled {
 <body>
 
 	<%
-	// Get product by id passed in query string
-	int productId = Integer.parseInt(request.getParameter("id"));
-	Product product = new ProductDao().DisplayProductByIdDao(productId);
+		HttpSession httpsession = request.getSession();
+		String userEmail = (String) httpsession.getAttribute("loggedInUser");
+		if (userEmail != null) {
+
+	
+		// Get product by id passed in query string
+		int productId = Integer.parseInt(request.getParameter("id"));
+		Product product = new ProductDao().DisplayProductByIdDao(productId);
 	%>
 
 	<div class="glass-form">
@@ -118,6 +124,18 @@ input[type="submit"]:disabled {
 				type="submit" id="updateBtn" value="Update" disabled>
 		</form>
 	</div>
+	
+	<%
+	} else {
+	%>
+
+	<%
+	response.sendRedirect("loginUser.jsp");
+	%>
+
+	<%
+	}
+	%>
 
 	<script>
 document.addEventListener("DOMContentLoaded", function () {

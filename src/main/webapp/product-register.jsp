@@ -86,8 +86,13 @@ input[type="submit"]:disabled {
 <body>
 
 	<%
-	    ProductDao dao = new ProductDao();
-	    int nextId = dao.getMaxProductId() + 1; // get next ID
+
+		HttpSession httpsession = request.getSession();
+		String userEmail = (String) httpsession.getAttribute("loggedInUser");
+		if (userEmail != null) {
+		
+		    ProductDao dao = new ProductDao();
+		    int nextId = dao.getMaxProductId() + 1; // get next ID
 	%>
 
 	<div class="glass-form">
@@ -95,27 +100,28 @@ input[type="submit"]:disabled {
 
 		<form action="product-register" method="post" id="productForm">
 
-			<label>Product Id</label> 
-			<input type="text" name="id" value="<%= nextId %>" readonly>
-
-			<label>Product Name</label> 
-			<input type="text" name="name" required>
-
-			<label>Product Color</label> 
-			<input type="text" name="color" required>
-
-			<label>Product Price</label> 
-			<input type="text" name="price" required>
-
-			<label>Product MFD</label> 
-			<input type="date" name="mfd" required>
-
-			<label>Product EXPD</label> 
-			<input type="date" name="expd" required>
-
-			<input type="submit" id="submitBtn" value="Register" disabled>
+			<label>Product Id</label> <input type="text" name="id"
+				value="<%= nextId %>" readonly> <label>Product Name</label>
+			<input type="text" name="name" required> <label>Product
+				Color</label> <input type="text" name="color" required> <label>Product
+				Price</label> <input type="text" name="price" required> <label>Product
+				MFD</label> <input type="date" name="mfd" required> <label>Product
+				EXPD</label> <input type="date" name="expd" required> <input
+				type="submit" id="submitBtn" value="Register" disabled>
 		</form>
 	</div>
+	
+	<%
+	} else {
+	%>
+
+	<%
+	response.sendRedirect("loginUser.jsp");
+	%>
+
+	<%
+	}
+	%>
 
 	<script>
 document.addEventListener("DOMContentLoaded", function () {

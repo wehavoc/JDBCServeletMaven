@@ -86,13 +86,13 @@ body {
 <!-- Navbar -->
 <div class="navbar">
     <a href="loginUser.jsp">Login</a>
-    <a href="register-user.jsp">Sign Up</a>
+    <a href="register.jsp">Sign Up</a>
 </div>
 
 <div class="glass-container">
     <h1>Welcome to Product Management System</h1>
     <a href="loginUser.jsp" class="button login-btn">Login</a>
-    <a href="register-user.jsp" class="button signup-btn">Sign Up</a>
+    <a href="register.jsp" class="button signup-btn">Sign Up</a>
 </div>
 
 </body>

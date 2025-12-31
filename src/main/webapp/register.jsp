@@ -1,3 +1,4 @@
+<%@page import="com.hcl_jdbc_and_servlet_crud_project.dao.UserDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -112,10 +113,13 @@ body {
 
 <div class="glass-container">
     <h2>User Sign Up</h2>
+    
+    
+    	<% int nextId = new UserDao().getNextUserId(); %>
 
     <form action="register" method="post">
-        <input type="number" name="id" class="input-field"
-               placeholder="Enter User ID" required>
+        <input type="number" name="id" value = <%=nextId %> class="input-field"
+               placeholder="Enter User ID" readonly required>
 
         <input type="text" name="name" class="input-field"
                placeholder="Enter Name" required>

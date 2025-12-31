@@ -133,12 +133,15 @@ a {
 <body>
 
 <%
-	// Get toast message from session if present
-	String msg = (String) session.getAttribute("msg");
-	String msgType = (String) session.getAttribute("msgType"); // "success" or "error"
-	if (msg != null) {
-		session.removeAttribute("msg");
-		session.removeAttribute("msgType");
+		HttpSession httpsession = request.getSession();
+		String userEmail = (String) httpsession.getAttribute("loggedInUser");
+		if (userEmail != null) {
+			// Get toast message from session if present
+			String msg = (String) session.getAttribute("msg");
+			String msgType = (String) session.getAttribute("msgType"); // "success" or "error"
+			if (msg != null) {
+				session.removeAttribute("msg");
+				session.removeAttribute("msgType");
 %>
 	<div id="toast" style="background-color: <%= "success".equals(msgType) ? "#4CAF50" : "#f44336" %>;">
 		<%= msg %>
@@ -188,6 +191,18 @@ a {
 			<%
 			}
 			%>
+			
+			<%
+	} else {
+	%>
+
+	<%
+	response.sendRedirect("loginUser.jsp");
+	%>
+
+	<%
+	}
+	%>
 		</tbody>
 	</table>
 </div>

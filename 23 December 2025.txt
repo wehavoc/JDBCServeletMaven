@@ -108,3 +108,5 @@ How to achive this:
 
 ## Session Timeout: here session automatically expires after inactive time we can set default timeout in web.xml or with the help of inbuilt method(s.setMaxInActiveInterval(time is second))
 To Do : create user class in DTO id, emial, password and in dao UserDao, create table in DB, Controller UserRegisterController,create signUp page, 
+
+Read sendRedirect and req.dispatcher difference.

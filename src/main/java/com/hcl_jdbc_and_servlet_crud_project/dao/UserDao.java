@@ -67,5 +67,19 @@ public class UserDao {
 	    }
 	    return false;
 	}
+	
+	public int getNextUserId() {
+	    String query = "SELECT MAX(id) AS max_id FROM users";
+	    try (Connection connection = JdbcConnection.getJdbcConnection();
+	         PreparedStatement ps = connection.prepareStatement(query);
+	         ResultSet rs = ps.executeQuery()) {
 
+	        if (rs.next()) {
+	            return rs.getInt("max_id") + 1;
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return 101; // Start IDs from 1 if table is empty
+	}
 }
