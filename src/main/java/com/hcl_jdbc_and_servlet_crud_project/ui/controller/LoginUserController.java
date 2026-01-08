@@ -42,6 +42,7 @@ public class LoginUserController extends HttpServlet {
                     res.sendRedirect("loginUser.jsp?status=invalid");
                 }
             } else {
+            	
                 // ❌ Email not found
                 res.sendRedirect("loginUser.jsp?status=invalid");
             }

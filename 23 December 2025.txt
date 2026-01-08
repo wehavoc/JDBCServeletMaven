@@ -110,3 +110,111 @@ How to achive this:
 To Do : create user class in DTO id, emial, password and in dao UserDao, create table in DB, Controller UserRegisterController,create signUp page, 
 
 Read sendRedirect and req.dispatcher difference.
+
+								07 January 2026
+								
+##Hibernate-JPA: 
+#What is hibernate: It is an object relational mapping(ORM) framework for java which is used to communicate from java appliation to database.
+it acts as a bridge betweeen your java code and database 
+it used to simplefy database intraction from java app to database
+
+#Why hibernate is used : When working with database developer has to wright sql queries and convert resultset into java objects manually and handle connections, transactions and exception manually but in hibernate all the above things will be automates no need to write manually 
+
+Note : hiberbate generate 80% query automatically but in some senario developer has to write 20% query manually.
+
+#How hibernate works:
+1. java classes(entity class) are automatically converted to database tables so no need create database manually 
+2. Entity fields(attributes) automatically conveted to database table columns 
+3. java classes objects are automatically saved as a database table rows. hiernate generate sql query behind the secene
+	for example: 
+		class Product{ ----> Entity class will be converted into table in database
+			id;
+			name;
+			color;
+			price
+		}
+		
+#Key features of hibernate: it is database independent framework. it automatic create the tables. it supports HQL(hibernate query language) that is object oriented query language and it is a alternative to SQL. It also supports JPQL with JPA(Jakarta persistance query language) it is also alternative of SQL. It manages the transaction with database
+
+#advantages of hibernate: It reduces SQL errors. it is easy to switch between multiple database it provide faster development with less code
+
+#Where hibernate is used: it enterprise java application and all kind of web applications. In modern era it is used in spring based application.
+
+#Hibernate vs JDBC 
+					JDBC																		Hibernate
+	It is low level API 													it is highlevel ORM framework build on top of JDBC
+	Developers write SQL query manually									But in hibernate 80% query generated automatically .
+	Developers handle Connection, Statement, Statements, ResultSet.		It handle connection, transaction and mapping internally.
+	JDBC  is faster  for simple application								Hibernate is better for complex application	
+	
+#What is JPA: It stands for java or jakarta persistance API. It is Java specification whichi used to manage, store and retrive data between java objecs and relational databases. JPA defines rules for ORM(Hibernate framework), but it does not provide implimentation.
+#What is Use of JPA: 
+	it provide specification to ORM tools to map java classes to database tables and manages object persistance. jPA defines annotations and APIs to provide rules to ORM. JPA itself cannot work alone it needs a provider such as
+		. Hibernate(most populer ORM)
+		. EclipseLink																																																							
+		. OpenJPA																																																							
+		. MyBeti																																																							
+#Advantages of JPA: It can integrate well with spring framework. it provides cleaner and portabel code and easy switch implementation.
+	
+#Difference between JPA and hibernate
+					JPA													Hibernate
+	JPA is specification define by java 						Hibernate is a ORM Framework 
+	It defines rules and APIs for ORM						It is JPA implementation
+	It does not provide implementation						It provide extra features beyond JPA 
+	It needs a provider to work								Can be used with or without JPA
+	
+								08 January 2026
+#Core JPA annotation: JPA provides multiple annotation which works with Hibernate, EclipseLink etc
+	1. @Entity: It is class level annotation which marks a class as a entity classs and mapped the class to database table
+		Example: @Entity 
+				class Product{  ----> It will be converted into table in database
+					id;
+					name;
+					color;
+					price;
+				}
+		
+	2. @Table(name="tablename provided by programmer side"): It is a class level annotation which is used provide tabel name from programmer side 
+		Example: @Table(name="");
+				 @Entity 
+				 class Product{  ----> It will be converted into table in database
+					id;
+					name;
+					color;
+					price;
+				 }
+	3. @Id: It is variable level annotaion which is used to decalre primary key 
+		Example: @Table(name="")   ------> it is used give table name different from class name 
+				 @Entity 
+				 class Product{  ----> It will be converted into table in database
+				 	@Id  -----> it used to make primary key in table 
+					id;
+					name;
+					color;
+					price;
+				 }
+	4. @Column(name = "", unique=true/false, nullabel = true/false, length=20) : This is variabel level annotation which is used provide column name from programmer side 
+		Example @Table(name="")   ------> it is used give table name different from class name 
+				 @Entity 
+				 class Product{  ----> It will be converted into table in database
+				 	@Id  -----> it used to make primary key in table 
+					id;
+					@Column(name = "s_name", unique=true/false, nullabel = true/false, length=20, extravalidation)
+					name;
+					color;
+					price;
+				 }
+	5. @Transient: It is variable level annotation which cannot be read and write inside database table 
+		@Table(name="")   ------> it is used give table name different from class name 
+				 @Entity 
+				 class Product{  ----> It will be converted into table in database
+				 	@Id  -----> it used to make primary key in table 
+					id;
+					@Column(name = "s_name", unique=true/false, nullabel = true/false, length=20, extravalidation)
+					name;
+					color;
+					price;
+					@Transient     -----> it stop to create a column in table but we can use in java file example like validation in program
+					boolean b;
+				 }
+	6. @Lob: it used to decide binary large object datatype inside database table 
